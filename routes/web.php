@@ -14,5 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('login', ["pageTitle" => "welcome"]);
+});
+
+Route::get("/r", function () {
+    return view("subreddit");
 });
