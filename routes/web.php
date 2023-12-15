@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SubredditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('login', ["pageTitle" => "welcome"]);
+Route::get("/", [SubredditController::class, "index"])->name("/");
+Route::get("/create", [SubredditController::class, "create"])->middleware(["auth", "verified"]);
+
+Route::get("/test", function() {
+    return view("index", ["pageTitle" => "Test"]);
+})->middleware(["auth", "verified"]);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get("/r", function () {
-    return view("subreddit");
-});
+
+require __DIR__.'/auth.php';
