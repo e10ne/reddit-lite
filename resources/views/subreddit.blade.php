@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<head>
-    <title>subreddit name</title>
-</head>
-<body>
-    <h1>Under construction</h1>
-    <p>This will have a list of latest posts</p>
-</body>
+<x-app-layout>
+    <div class="p-4 text-lime-700">
+        <h2 class="text-5xl">Subreddit</h2>
+        @foreach ($subreddits as $item)
+            <p>{{ $item->title }}</p>
+        @endforeach
+    </div>
+</x-app-layout>
