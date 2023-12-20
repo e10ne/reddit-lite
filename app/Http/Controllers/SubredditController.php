@@ -17,6 +17,16 @@ class SubredditController extends Controller
 
     public function create()
     {
-        return "test";
+        return view("createSubreddit");
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            "title" => "regex:/^[a-zA-Z0-9]+$/|required|unique:subreddits|max:255",
+            "visibility" => "required",
+            "description" => "required|max:255",
+            "rules" => "required|max:255",
+        ]);
     }
 }
