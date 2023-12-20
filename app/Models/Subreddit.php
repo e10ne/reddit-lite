@@ -12,7 +12,10 @@ class Subreddit extends Model
     use HasFactory;
 
     protected $fillable = [
-
+        "title",
+        "visibility",
+        "description",
+        "rules",
     ];
 
     public function members(): BelongsToMany {
