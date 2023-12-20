@@ -25,9 +25,11 @@
             </header>
 
             <!-- Page Content -->
-            <main class="flex flex-1 mb-1">
+            <main class="flex flex-1 mb-1 ">
                 @include("layouts.sidebar")
-                {{ $slot }}
+                <section class="p-4 bg-gray-100 dark:bg-gray-900 w-full flex flex-col text-gray-700 dark:text-gray-200">
+                    {{ $slot }}
+                </section>
             </main>
         </div>
     </body>
