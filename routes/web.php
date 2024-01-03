@@ -18,6 +18,7 @@ use App\Http\Controllers\SubredditController;
 Route::get("/", [SubredditController::class, "index"])->name("/");
 Route::get("/create", [SubredditController::class, "create"])->middleware(["auth", "verified"]);
 Route::post("/create", [SubredditController::class, "store"])->middleware(["auth", "verified"]);
+Route::get("/r/{title}", [SubredditController::class, "show"]);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

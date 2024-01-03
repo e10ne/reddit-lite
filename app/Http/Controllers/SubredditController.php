@@ -41,4 +41,16 @@ class SubredditController extends Controller
 
         return redirect("/");
     }
+
+    public function show(string $title)
+    {
+        $data = Subreddit::where("title", $title)->first();
+        if (!empty($data)) {
+            return view("subreddit.index", [
+                "data" => $data
+            ]);
+        }
+
+        return back();
+    }
 }
