@@ -17,7 +17,7 @@ class SubredditController extends Controller
 
     public function create()
     {
-        return view("createSubreddit");
+        return view("subreddit.create");
     }
 
     public function store(Request $request)
@@ -53,4 +53,6 @@ class SubredditController extends Controller
 
         return back();
     }
+
+
 }
