@@ -44,10 +44,12 @@ class SubredditController extends Controller
 
     public function show(string $title)
     {
-        $data = Subreddit::where("title", $title)->first();
-        if (!empty($data)) {
+        $subreddit = Subreddit::where("title", $title)->first();
+
+        if (!empty($subreddit)) {
+            // $posts
             return view("subreddit.index", [
-                "data" => $data
+                "subreddit" => $subreddit
             ]);
         }
 
