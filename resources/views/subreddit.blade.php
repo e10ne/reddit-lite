@@ -1,5 +1,12 @@
 <x-app-layout>
-    <h2 class="text-4xl text-lime-700 mb-6">Subreddit</h2>
+    <div class="flex justify-around">
+        <h2 class="text-4xl text-lime-700 mb-6">Subreddits</h2>
+        @auth
+            <a href="/create">
+                <p>Create a new subreddit</p>
+            </a>
+        @endauth
+    </div>
     @foreach ($subreddits as $item)
         <article class="border flex flex-col gap-4 p-4 my-4 w-1/2 mx-4">
             <a href="/r/{{$item->title}}">
