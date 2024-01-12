@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Subreddit;
 
@@ -23,10 +24,10 @@ class SubredditController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            "title" => "regex:/^[a-zA-Z0-9]+$/|required|unique:subreddits|max:255",
+            "title" => "regex:/^[a-zA-Z0-9]+$/|required|unique:subreddits|max:255|min:3",
             "visibility" => "required",
-            "description" => "required|max:255",
-            "rules" => "required|max:255",
+            "description" => "required|max:255|min:10",
+            "rules" => "required|max:255|min:5",
         ]);
 
         $subreddit = new Subreddit();
@@ -39,7 +40,7 @@ class SubredditController extends Controller
         $id = $request->user()->id;
         $subreddit->members()->attach($id, ["role" => "admin"]);
 
-        return redirect("/");
+        return redirect("/r/{$subreddit->title}");
     }
 
     public function show(string $title)
@@ -47,14 +48,13 @@ class SubredditController extends Controller
         $subreddit = Subreddit::where("title", $title)->first();
 
         if (!empty($subreddit)) {
-            // $posts
+            $posts = Post::where("subreddit_id", $subreddit->id)->get();
             return view("subreddit.index", [
-                "subreddit" => $subreddit
+                "subreddit" => $subreddit,
+                "posts" => $posts,
             ]);
         }
 
         return back();
     }
-
-
 }

@@ -2,9 +2,7 @@
     <div class="flex justify-around">
         <h2 class="text-4xl text-lime-700 mb-6">Subreddits</h2>
         @auth
-            <a href="/create">
-                <p>Create a new subreddit</p>
-            </a>
+            <a href="/create">Create a new subreddit</a>
         @endauth
     </div>
     @foreach ($subreddits as $item)
